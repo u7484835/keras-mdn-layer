@@ -83,6 +83,8 @@ class MDN(layers.Layer):
     # def from_config(cls, config):
     #     return cls(**config)
 
+def plusOne(x):
+    return x + 1
 
 def get_mixture_loss_func(output_dim, num_mixes):
     """Construct a loss functions for the MDN layer parametrised by number of mixtures."""
