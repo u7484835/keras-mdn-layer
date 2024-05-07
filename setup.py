@@ -23,7 +23,7 @@ setup(
     long_description_content_type="text/markdown",
     author='Charles Martin',
     author_email='cpm@charlesmartin.au',
-    url='https://github.com/cpmpercussion/keras-mdn-layer',
+    url='https://github.com/u7484835/keras-mdn-layer',
     license='MIT',
     packages=['mdn'],
     include_package_data=True,
