@@ -30,7 +30,7 @@ model.add(mdn.MDN(1, N_MIXES))
 model.compile(loss=mdn.get_mixture_loss_func(1, N_MIXES), optimizer=keras.optimizers.Adam())
 model.summary()
 
-history = model.fit(x=x_data, y=y_data, batch_size=128, epochs=500, validation_split=0.15)
+history = model.fit(x=x_data, y=y_data, batch_size=128, epochs=200, validation_split=0.15)
 
 # Sample on some test data:
 x_test = np.float32(np.arange(-15, 15, 0.01))
