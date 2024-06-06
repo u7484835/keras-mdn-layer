@@ -31,7 +31,7 @@ model.compile(loss=mdn.get_mixture_loss_func(1, N_MIXES), optimizer=keras.optimi
 model.summary()
 
 # Saves .keras model to this folder for later comparison with .tflite model
-model.save("examples/MDN-1D-sine-prediction-model.keras")
+model.save("examples/1-sineprediction-keras.keras")
 
 history = model.fit(x=x_data, y=y_data, batch_size=128, epochs=200, validation_split=0.15)
 
