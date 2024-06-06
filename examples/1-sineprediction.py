@@ -27,7 +27,19 @@ model.add(mdn.MDN(1, N_MIXES))
 model.compile(loss=mdn.get_mixture_loss_func(1, N_MIXES), optimizer=keras.optimizers.Adam())
 model.summary()
 
+
+# Save model to keras format to test capabilities
+model.save("MDN-1D-sine-prediction-model.keras")
+
 history = model.fit(x=x_data, y=y_data, batch_size=128, epochs=500, validation_split=0.15)
+
+# Load the model from keras format to new variable
+# To load models from file, you need to supply the layer and loss function as custom_objects:
+modelKeras = keras.models.load_model('MDN-1D-sine-prediction-model.keras', custom_objects={'MDN': mdn.MDN, 'mdn_loss_func': mdn.get_mixture_loss_func(1, N_MIXES)})
+
+
+modeflTflite = modelKeras
+
 
 # Sample on some test data:
 x_test = np.float32(np.arange(-15, 15, 0.01))

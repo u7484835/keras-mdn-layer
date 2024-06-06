@@ -11,6 +11,9 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 import keras_mdn_layer as mdn
 import numpy as np
 
+# Converting for tensorflow lite.
+import tensorflow as tf
+
 
 # Generating some data:
 NSAMPLE = 3000
@@ -30,10 +33,13 @@ model.add(mdn.MDN(1, N_MIXES))
 model.compile(loss=mdn.get_mixture_loss_func(1, N_MIXES), optimizer=keras.optimizers.Adam())
 model.summary()
 
-# Saves .keras model to this folder for later comparison with .tflite model
-model.save("examples/MDN-1D-sine-prediction-model.keras")
-
 history = model.fit(x=x_data, y=y_data, batch_size=128, epochs=200, validation_split=0.15)
+
+
+
+
+
+
 
 # Sample on some test data:
 x_test = np.float32(np.arange(-15, 15, 0.01))
@@ -54,11 +60,6 @@ mus = np.apply_along_axis((lambda a: a[:N_MIXES]), 1, y_test)
 sigs = np.apply_along_axis((lambda a: a[N_MIXES:2*N_MIXES]), 1, y_test)
 pis = np.apply_along_axis((lambda a: mdn.softmax(a[2*N_MIXES:])), 1, y_test)
 
-
-
-# Converting for tensorflow lite.
-import tensorflow as tf
-
 converter = tf.lite.TFLiteConverter.from_keras_model(model)
 
 # converter.optimizations = [tf.lite.Optimize.DEFAULT]
@@ -69,8 +70,6 @@ tf.lite.OpsSet.SELECT_TF_OPS, # enable TensorFlow ops.
 # converter._experimental_lower_tensor_list_ops = False
 
 tflite_model = converter.convert()
-
-# Saves converted file to this folder
 tflite_model_name = 'examples/1-sineprediction-lite.tflite'
 
 
