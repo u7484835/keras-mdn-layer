@@ -30,6 +30,9 @@ model.add(mdn.MDN(1, N_MIXES))
 model.compile(loss=mdn.get_mixture_loss_func(1, N_MIXES), optimizer=keras.optimizers.Adam())
 model.summary()
 
+# Saves .keras model to this folder for later comparison with .tflite model
+model.save("MDN-1D-sine-prediction-model.keras")
+
 history = model.fit(x=x_data, y=y_data, batch_size=128, epochs=200, validation_split=0.15)
 
 # Sample on some test data:
@@ -66,6 +69,8 @@ tf.lite.OpsSet.SELECT_TF_OPS, # enable TensorFlow ops.
 # converter._experimental_lower_tensor_list_ops = False
 
 tflite_model = converter.convert()
+
+# Saves converted file to this folder
 tflite_model_name = 'examples/1-sineprediction-lite.tflite'
 
 
