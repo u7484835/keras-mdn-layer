@@ -1,4 +1,7 @@
-# Keras Mixture Density Network Layer
+# Keras Mixture Density Network Layer Save Progress
+
+(Just using this branch as a quick way to store all of my progress before I trim master)
+
 
 [![Build and test keras-mdn-layer](https://github.com/cpmpercussion/keras-mdn-layer/actions/workflows/python-app.yml/badge.svg)](https://github.com/cpmpercussion/keras-mdn-layer/actions/workflows/python-app.yml)
 ![MIT License](https://img.shields.io/github/license/cpmpercussion/keras-mdn-layer.svg?style=flat)
